@@ -17,7 +17,9 @@ interface IFormInput {
 export default function Dropdown() {
   const [posts, setPosts] = useState([]);
   const { register, handleSubmit } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    return console.log(data);
+  };
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/posts")
@@ -37,7 +39,7 @@ export default function Dropdown() {
     <div className="flex items-center justify-center mt-11">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-control">
-          <label className="label">
+          <label className="lSSS">
             <span className="label-text">Name</span>
           </label>
           <input
@@ -54,6 +56,9 @@ export default function Dropdown() {
           <select
             className="select select-bordered w-48 text-black"
             {...register("gender")}
+            /*  onChange={(e) => {
+              console.log("Selected gender:", e.target.value);
+            }} */
           >
             {dropdownOption}
           </select>
