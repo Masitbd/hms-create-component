@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
+import { SlBriefcase } from "react-icons/sl";
 
 export default function SideBarItems({ role }: { role: string }) {
   const [activeLink, setActiveLink] = useState("");
@@ -15,7 +16,7 @@ export default function SideBarItems({ role }: { role: string }) {
           onClick={() => handleLinkClick(`/${role}`)}
           className={activeLink === `/${role}` ? "active" : ""}
         >
-          Dashboard Home
+          <SlBriefcase /> Dashboard Home
         </a>
       </Link>
     </li>
