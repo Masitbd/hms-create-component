@@ -39,7 +39,7 @@ export default function Modal({ showModal, setShowModal }: ModalProps) {
 
   return (
     <dialog id="my_modal_4" className="modal" open={showModal}>
-      <div className="modal-box w-11/12 max-w-3xl bg-slate-100">
+      <div className="modal-box w-11/12 max-w-3xl bg-slate-200">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control">
             <label className="label">
@@ -47,8 +47,9 @@ export default function Modal({ showModal, setShowModal }: ModalProps) {
             </label>
             <select
               className="select select-bordered"
-              {...register("testName")}
+              {...register("testName", { required: true })}
             >
+              <option disabled selected></option>
               {dropdownOption}
             </select>
           </div>
@@ -80,15 +81,25 @@ export default function Modal({ showModal, setShowModal }: ModalProps) {
               />
             </div>
           </div>
-          <button type="submit">Submit</button>
+          <div className="flex justify-end">
+            <div className="mt-4 mr-2">
+              <button className="btn btn-success my-2" type="submit">
+                Submit
+              </button>
+            </div>
+            <div className="modal-action">
+              <form method="dialog">
+                <button
+                  className="btn"
+                  type="button"
+                  onClick={handleModalClose}
+                >
+                  Close
+                </button>
+              </form>
+            </div>
+          </div>
         </form>
-        <div className="modal-action">
-          <form method="dialog">
-            <button className="btn" type="button" onClick={handleModalClose}>
-              Close
-            </button>
-          </form>
-        </div>
       </div>
     </dialog>
   );
