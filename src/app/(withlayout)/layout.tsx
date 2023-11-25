@@ -1,5 +1,5 @@
 "use client";
-
+// This is admin dashboard
 import SideBarItems from "@/utils/sidebarItems";
 import React, { ReactNode } from "react";
 
@@ -22,7 +22,7 @@ export default function layout({ children }: ILayoutProps) {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu p-4 w-52 min-h-full bg-base-200">
+        <ul className="menu p-4 w-52 min-h-full bg-slate-200">
           <SideBarItems role={role} />
         </ul>
       </div>
