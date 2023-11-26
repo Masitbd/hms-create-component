@@ -1,3 +1,4 @@
+import { useAppDispatch } from "@/app/redux/hook";
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -15,9 +16,11 @@ interface ModalProps {
 export default function Modal({ showModal, setShowModal }: ModalProps) {
   const [posts, setPosts] = useState([]);
   const { register, handleSubmit } = useForm<FormData>();
+  const dispatch = useAppDispatch();
 
   const onSubmit: SubmitHandler<FormData> = (data, event) => {
     console.log(data);
+    dispatch({ type: "ADD_TO_CART", payload: data });
   };
   const handleModalClose = () => {
     setShowModal(false);
