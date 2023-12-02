@@ -1,26 +1,46 @@
-interface Product {
-  id: string;
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+interface IProduct {
   testName: string;
-  qtantity: number;
+  quantity: number;
+  remark: string;
 }
 
-interface State {
-  cart: Product[];
+interface ICart {
+  products: IProduct[];
 }
 
-interface Action {
-  type: string;
-  payload: Product;
-}
-
-const initialState: State = {
-  cart: [],
+const initialState: ICart = {
+  products: [],
 };
-const productReducer = (state: State = initialState, action: Action) => {
+
+const cartSlice = createSlice({
+  name: "cart",
+  initialState,
+  reducers: {
+    addToCart: (state, action: PayloadAction<IProduct>) => {
+      const existing = state.products.find(
+        (product) => product.testName === action.payload.testName
+      );
+      console.log("cart action", action.payload);
+      if (existing) {
+        console.log("Duplicate product found");
+      } else {
+        state.products.push({ ...action.payload });
+      }
+    },
+  },
+});
+
+export const { addToCart } = cartSlice.actions;
+export default cartSlice.reducer;
+
+/* const productReducer = (state: State = initialState, action: Action) => {
   const selectedProduct = state?.cart.find(
     (product) => product.testName === action.payload.testName
   );
 
+  console.log("card", state.cart);
   switch (action.type) {
     case "ADD_TO_CART":
       if (selectedProduct) {
@@ -42,3 +62,4 @@ const productReducer = (state: State = initialState, action: Action) => {
 };
 
 export default productReducer;
+ */

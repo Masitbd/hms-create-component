@@ -1,13 +1,20 @@
+import { addToCart } from "@/app/redux/features/addItem/addItemSlice";
 import { useAppDispatch } from "@/app/redux/hook";
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 interface FormData {
+  id: string;
   testName: string;
   quantity: number;
   remark: string;
 }
-
+/* interface IProduct {
+  id: string;
+  testName: string;
+  quantity: number; // Corrected property name
+  remark: string;
+} */
 interface ModalProps {
   showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,9 +25,9 @@ export default function Modal({ showModal, setShowModal }: ModalProps) {
   const { register, handleSubmit } = useForm<FormData>();
   const dispatch = useAppDispatch();
 
-  const onSubmit: SubmitHandler<FormData> = (data, event) => {
+  const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log(data);
-    dispatch({ type: "ADD_TO_CART", payload: data });
+    dispatch(addToCart(data));
   };
   const handleModalClose = () => {
     setShowModal(false);

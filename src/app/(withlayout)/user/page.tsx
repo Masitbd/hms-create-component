@@ -1,5 +1,6 @@
 "use client";
 import Modal from "@/app/components/modal/Modal";
+import { useAppDispatch, useAppSelector } from "@/app/redux/hook";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -17,7 +18,9 @@ interface IFormInput {
 const YourComponent: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const { register, handleSubmit } = useForm<IFormInput>();
-
+  // const dispatch = useAppDispatch();
+  const cart = useAppSelector((state) => state.product.products);
+  console.log("cart data from redux", cart);
   const onSubmit = (data: IFormInput) => {
     console.log(data);
   };
